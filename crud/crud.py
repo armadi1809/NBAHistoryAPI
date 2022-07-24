@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session 
-import models, schemas
+from models import models 
+from schemas import schemas
 
 def get_team(db: Session, team_id: int): 
     return db.query(models.Team).filter(models.Team.id == team_id).first()
