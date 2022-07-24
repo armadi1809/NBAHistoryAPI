@@ -28,3 +28,6 @@ class TeamUpdate(TeamBase):
      
     historic_fact: str
 
+class Token(BaseModel):
+    access_token: str
+    token_type: str
