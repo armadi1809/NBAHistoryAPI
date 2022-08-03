@@ -7,8 +7,6 @@ class Team(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(20), nullable=False, unique=True, index=True)
-    historic_fact = Column(String, nullable=False)
-
     facts = relationship("Fact", back_populates="team")
 
 class Fact(Base): 

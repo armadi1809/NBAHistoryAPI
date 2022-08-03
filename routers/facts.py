@@ -9,7 +9,7 @@ router = APIRouter(
     tags=["Team_facts"]
 )
 
-@router.put("/fact/{id}", response_model=schemas.Fact)
+@router.put("/{id}", response_model=schemas.Fact)
 def update_fact(id: int, new_fact: str, db: Session = Depends(get_db)):
     db_fact = crud.get_fact_by_id(db, id)
     if not db_fact: 
@@ -18,3 +18,11 @@ def update_fact(id: int, new_fact: str, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_fact)
     return db_fact
+    
+@router.get("/random", response_model=schemas.Fact)
+def get_random_fact(db: Session = Depends(get_db)):
+    return crud.get_random_fact(db)
+
+@router.delete("/{id}")
+def delete_by_id(id: int, db: Session = Depends(get_db)) :
+    return crud.delete_fact_by_id(db, id)

@@ -15,18 +15,12 @@ class Fact(FactBase):
 
 class TeamBase(BaseModel): 
     name: str 
-    historic_fact: str = None 
-
 
 class Team(TeamBase): 
     id: int 
     facts: List[Fact] = []
     class Config: 
         orm_mode = True 
-
-class TeamUpdate(TeamBase): 
-     
-    historic_fact: str
 
 class Token(BaseModel):
     access_token: str

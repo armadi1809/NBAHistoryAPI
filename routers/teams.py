@@ -42,3 +42,4 @@ def read_team(id: int, db: Session = Depends(get_db), valid_token: int = Depends
 @router.post("/{id}/facts", response_model=schemas.Fact)
 def creat_fact_for_team(id:int, fact:schemas.FactCreate, db: Session = Depends(get_db)):
     return crud.create_team_fact(db, fact, id)
+
