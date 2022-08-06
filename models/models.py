@@ -1,5 +1,6 @@
+from email.policy import default
 from db.db import Base 
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
 class Team(Base): 
@@ -17,3 +18,11 @@ class Fact(Base):
     team_id = Column(Integer, ForeignKey("teams.id"))
 
     team = relationship("Team", back_populates="facts")
+
+class User(Base):
+    __tablename__="users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)

@@ -2,6 +2,17 @@ from sqlalchemy.orm import Session
 from models import models 
 from schemas import schemas
 import random
+from Auth.jwt_handler import get_password_hash
+
+
+def create_user(db:Session, user: schemas.UserCreate):
+    password = get_password_hash(user.password)
+    user = models.User(username = user.username, hashed_password=password)
+    db.add(user)
+    db.commit()
+    db.refresh(user)
+    return user
+
 
 def get_team(db: Session, team_id: int): 
     return db.query(models.Team).filter(models.Team.id == team_id).first()
@@ -46,3 +57,4 @@ def delete_fact_by_id(db:Session, id:int):
     db.query(models.Fact).filter_by(id=id).delete()
     db.commit()
     return {"Delete Operation": "Success"}
+
