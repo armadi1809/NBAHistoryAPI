@@ -30,7 +30,7 @@ router = APIRouter(
 #     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 #     return encoded_jwt
 
-@router.post("", response_model=schemas.Token)
+@router.post("#", response_model=schemas.Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = authenticate_user(db, form_data.username, form_data.password)
     if not user:
